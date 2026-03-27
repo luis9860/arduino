@@ -21,10 +21,10 @@ static void scheduleFixedSpark(uint32_t nowUs) {
         return;
     }
 
-    if (engine.engineRpm <= 0.0f || !engine.synced) {
-        clearSchedule();
-        return;
-    }
+if (engine.engineRpm <= 0.0f || !engine.synced || engine.toothIndex == 0xFF) {
+    clearSchedule();
+    return;
+}
 
     // Mapa simple:
     // cada toothIndex representa un cilindro / canal secuencial.

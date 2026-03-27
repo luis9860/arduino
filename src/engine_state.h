@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Arduino.h>
+    static const uint8_t TOOTH_INDEX_NOT_READY = 0xFF;
 
 struct EngineState {
     volatile bool newTooth = false;

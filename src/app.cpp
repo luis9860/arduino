@@ -9,7 +9,7 @@
 #include "serial_debug.h"
 
 void appSetup() {
-    Serial.begin(SERIAL_BAUD);
+    //Serial.begin(SERIAL_BAUD);
 
     coilInit();
     inputCaptureInit();
