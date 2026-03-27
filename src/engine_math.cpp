@@ -25,15 +25,16 @@ float calcEngineAngleDegFromCamTooth(uint8_t toothIndex, float engineToothAngleD
 
 uint32_t degreesToMicroseconds(float degrees, float engineRpm) {
     if (engineRpm <= 0.0f) {
-        return 0;
+        return 0UL;
     }
 
+    // Tiempo de una vuelta de cigüeñal (360°)
     const float usPerEngineRev = 60000000.0f / engineRpm;
     const float usPerDeg = usPerEngineRev / 360.0f;
     const float result = degrees * usPerDeg;
 
     if (result <= 0.0f) {
-        return 0;
+        return 0UL;
     }
 
     return static_cast<uint32_t>(result);

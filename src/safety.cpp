@@ -1,4 +1,5 @@
 #include <Arduino.h>
+
 #include "safety.h"
 #include "engine_state.h"
 #include "coil_driver.h"
@@ -19,16 +20,20 @@ void safetyTask() {
     if ((nowUs - engine.lastToothTimeUs) > ENGINE_STOP_TIMEOUT_US) {
         engine.camRpm = 0.0f;
         engine.engineRpm = 0.0f;
+        engine.engineAngleDeg = 0.0f;
+
         engine.engineRunning = false;
         engine.synced = false;
         engine.toothIndex = 0;
+
         engine.sparkScheduled = false;
+        engine.scheduledCoilIndex = 0;
         engine.scheduledChargeStartUs = 0;
         engine.scheduledSparkUs = 0;
         engine.dwellUs = 0;
 
-        if (engine.coilCharging || coilIsOn()) {
-            coilOff();
+        if (engine.coilCharging || coilIsOn(engine.scheduledCoilIndex)) {
+            coilAllOff();
             engine.coilCharging = false;
         }
     }

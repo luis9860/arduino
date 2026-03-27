@@ -1,6 +1,9 @@
 #pragma once
 
+#include <Arduino.h>
+
 void coilInit();
-void coilOn();
-void coilOff();
-bool coilIsOn();
+void coilOn(uint8_t coilIndex);
+void coilOff(uint8_t coilIndex);
+void coilAllOff();
+bool coilIsOn(uint8_t coilIndex);

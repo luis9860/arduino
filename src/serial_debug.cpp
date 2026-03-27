@@ -1,4 +1,5 @@
 #include <Arduino.h>
+
 #include "serial_debug.h"
 #include "engine_state.h"
 #include "coil_driver.h"
@@ -35,8 +36,11 @@ void debugTask() {
     Serial.print(" | PeriodUs=");
     Serial.print(engine.toothPeriodUs);
 
-    Serial.print(" | Coil=");
-    Serial.print(coilIsOn() ? "ON" : "OFF");
+    Serial.print(" | CoilIdx=");
+    Serial.print(engine.scheduledCoilIndex + 1);
+
+    Serial.print(" | CoilState=");
+    Serial.print(coilIsOn(engine.scheduledCoilIndex) ? "ON" : "OFF");
 
     Serial.print(" | Charging=");
     Serial.print(engine.coilCharging ? "YES" : "NO");
