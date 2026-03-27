@@ -10,7 +10,7 @@ struct EngineState {
     volatile uint32_t prevToothPeriodUs = 0;
 
     volatile bool synced = false;
-    volatile uint8_t toothIndex = 0;      // 0..5
+    volatile uint8_t toothIndex = TOOTH_INDEX_NOT_READY;      // 0..5
     volatile uint32_t toothCounter = 0;
 
     float camRpm = 0.0f;

@@ -20,8 +20,7 @@ static void scheduleFixedSpark(uint32_t nowUs) {
         clearSchedule();
         return;
     }
-
-if (engine.engineRpm <= 0.0f || !engine.synced || engine.toothIndex == 0xFF) {
+if (engine.engineRpm <= 0.0f || !engine.synced || engine.toothIndex == TOOTH_INDEX_NOT_READY) {
     clearSchedule();
     return;
 }
@@ -96,8 +95,10 @@ void ignitionSchedulerTask() {
         engine.engineRpm =
             camRPMToEngineRPM(engine.camRpm);
 
-        engine.engineAngleDeg =
-            calcEngineAngleDegFromCamTooth(engine.toothIndex, ENGINE_TOOTH_ANGLE_DEG);
+if (engine.toothIndex != TOOTH_INDEX_NOT_READY) {
+    engine.engineAngleDeg =
+        calcEngineAngleDegFromCamTooth(engine.toothIndex, ENGINE_TOOTH_ANGLE_DEG);
+}
 
         engine.engineRunning = (engine.engineRpm > 0.0f);
 
