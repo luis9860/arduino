@@ -17,7 +17,8 @@ void safetyTask() {
 
     // Pérdida de señal / motor detenido
     if ((nowUs - engine.lastToothTimeUs) > ENGINE_STOP_TIMEOUT_US) {
-        engine.rpm = 0.0f;
+        engine.camRpm = 0.0f;
+        engine.engineRpm = 0.0f;
         engine.engineRunning = false;
         engine.synced = false;
         engine.toothIndex = 0;
